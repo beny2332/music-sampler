@@ -9,7 +9,7 @@ const AudioGridContainer: React.FC = () => {
   const [columns, setColumns] = useState(DEFAULT_COLUMNS);
 
   return (
-    <div className="p-4">
+    <div >
       <AudioGrid
         columns={columns}
         tempo={120}

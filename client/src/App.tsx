@@ -1,10 +1,10 @@
-import AudioGrid from "./components/AudioGrid/AudioGrid";
+import AudioGridContainer from "./components/AudioGrid/AudioGridContainer";
 
 function App() {
   return (
     <div>
-      <h1>🎵 Music Sampler</h1>
-      <AudioGrid columns={16} tempo={100} />
+      <h1>🎵 Beat Sampler</h1>
+      <AudioGridContainer />
     </div>
   );
 }

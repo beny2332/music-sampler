@@ -7,6 +7,12 @@ export function useSampleMap(apiUrl: string, columns: number) {
   const [grid, setGrid] = useState<boolean[][]>([]);
   const [error, setError] = useState<string | null>(null);
 
+    useEffect(() => {
+    if (sampleNames.length > 0) {
+      setGrid(sampleNames.map(() => Array(columns).fill(false)));
+    }
+  }, [columns, sampleNames]);
+  
   useEffect(() => {
     fetchSampleMap(apiUrl)
       .then((data) => {
