@@ -1,6 +1,6 @@
 import React from "react";
-import GridCell from "./GridCell";
-import { useAudioGrid } from "../hooks/useAudioGrid";
+import GridCell from "../GridCell/GridCell";
+import { useAudioGrid } from "../../hooks/useAudioGrid";
 import "./AudioGrid.css"; // Import the CSS file
 
 type AudioGridProps = {

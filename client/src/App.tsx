@@ -1,4 +1,4 @@
-import AudioGrid from "./components/AudioGrid";
+import AudioGrid from "./components/AudioGrid/AudioGrid";
 
 function App() {
   return (
