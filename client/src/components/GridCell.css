@@ -1,0 +1,25 @@
+.grid-cell {
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  border: 2px solid #999;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.grid-cell.active {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.grid-cell.current {
+  background-color: #ddd;
+  border-color: #2196f3;
+}
+
+.grid-cell.active.current {
+  background-color: #4caf50;
+  border-color: #4caf50;    
+}

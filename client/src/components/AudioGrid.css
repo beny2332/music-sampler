@@ -1,0 +1,21 @@
+.audio-grid-container {
+  padding: 20px;
+  border: 1px solid red;
+}
+
+.audio-grid-info {
+  margin-bottom: 8px;
+}
+
+.audio-grid-row {
+  display: flex;
+  align-items: center;
+}
+
+.audio-grid-sample-name {
+  width: 120px;
+}
+
+.audio-grid-cells {
+  display: flex;
+}
