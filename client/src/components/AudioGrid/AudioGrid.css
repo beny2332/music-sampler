@@ -1,3 +1,7 @@
+.audio-grid {
+  margin-top: 16px;
+  overflow-x: auto;
+}
 .audio-grid-container {
   padding: 20px;
   background-color: #f5f5f5;
@@ -68,20 +72,9 @@
   border-radius: 6px;
 }
 
-.audio-grid-buttons {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
 .control-group {
   display: flex;
   align-items: center;
-  gap: 4px;
-}
-
-.column-controls {
-  display: flex;
   gap: 4px;
 }
 
@@ -123,28 +116,4 @@
   text-align: center;
   font-weight: 500;
   padding: 0 4px;
-}
-
-.audio-grid {
-  margin-top: 16px;
-  overflow-x: auto;
-}
-
-.column-button {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  border-radius: 4px;
-}
-
-.column-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.play-button {
-  min-width: 70px;
 }

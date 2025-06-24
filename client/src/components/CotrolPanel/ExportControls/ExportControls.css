@@ -1,0 +1,13 @@
+.control-button.export {
+  background-color: #c3e6cb;
+  color: #155724;
+  font-weight: bold;
+}
+
+.control-button.export:hover {
+  background-color: #b1dfbb;
+}
+
+.export-controls {
+  margin-left: auto; /* Optional: Push export button to the right */
+}

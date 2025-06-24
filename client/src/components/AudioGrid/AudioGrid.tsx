@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import GridCell from "../GridCell/GridCell";
 import { useAudioGrid } from "../../hooks/useAudioGrid";
 import "./AudioGrid.css"; 
-import { formatSampleName } from "../../utils/formatSampleName";
+import ControlPanel from "../CotrolPanel/ControlPanel";
+import GridRow from "../GridRow/GridRow";
+import CategoryTabs from "../CotrolPanel/CategoryTabs/CategoryTabs";
 
 type AudioGridProps = {
   columns: number;
@@ -52,6 +53,7 @@ const instrumentCategories: Record<CategoryName, string[]> = {
     increaseSpeed,
     decreaseSpeed,
     toggleLoop,
+    clearAllCells
   } = useAudioGrid(columns, tempo);
 
   const toggleCategory = (category: CategoryName) => {
@@ -80,150 +82,65 @@ const organizedInstruments = activeCategories.flatMap(category => {
   }
 
   return (
-    <div className="audio-grid-container">
+     <div className="audio-grid-container">
       {/* Grid information */}
       <div className="audio-grid-info">
         <div>Columns: {columns}</div>
         <div>Current beat: {currentColumn >= 0 ? currentColumn + 1 : "-"}</div>
       </div>
       
-      {/* Playback controls */}
-      <div className="audio-grid-controls">
-        <div className="control-group">
-          <button 
-            onClick={isPlaying ? pause : start} 
-            className="control-button"
-            title={isPlaying ? "Pause" : "Play"}
-          >
-            {isPlaying ? "⏸️" : "▶️"}
-          </button>
-          <button 
-            onClick={stop} 
-            className="control-button"
-            title="Stop"
-          >
-            ⏹️
-          </button>
-          <button 
-            onClick={reset} 
-            className="control-button"
-            title="Reset to beginning"
-          >
-            ⏮️
-          </button>
-        </div>
-        
-        {/* Loop Control */}
-        <div className="control-group">
-          <button 
-            onClick={toggleLoop} 
-            className={`control-button ${looping ? 'active' : ''}`}
-            title={looping ? "Disable Loop" : "Enable Loop"}
-          >
-            {looping ? "🔄" : "↩️"}
-          </button>
-        </div>
-        
-        {/* Volume controls */}
-        <div className="control-group">
-          <button 
-            onClick={decreaseVolume} 
-            className="control-button"
-            title="Decrease volume"
-          >
-            🔉
-          </button>
-          <div className="control-value">
-            {Math.round(volume * 100)}%
-          </div>
-          <button 
-            onClick={increaseVolume} 
-            className="control-button"
-            title="Increase volume"
-          >
-            🔊
-          </button>
-        </div>
-        
-        {/* Speed controls */}
-        <div className="control-group">
-          <button 
-            onClick={decreaseSpeed} 
-            className="control-button"
-            title="Decrease speed"
-          >
-            🐢
-          </button>
-          <div className="control-value">
-            {playbackRate.toFixed(2)}x
-          </div>
-          <button 
-            onClick={increaseSpeed} 
-            className="control-button"
-            title="Increase speed"
-          >
-            🐰
-          </button>
-        </div>
+      {/* Control panel with all controls */}
+      <ControlPanel
+        isPlaying={isPlaying}
+        looping={looping}
+        volume={volume}
+        playbackRate={playbackRate}
+        canAddColumn={canAddColumn}
+        canRemoveColumn={canRemoveColumn}
+        start={start}
+        pause={pause}
+        stop={stop}
+        reset={reset}
+        toggleLoop={toggleLoop}
+        increaseVolume={increaseVolume}
+        decreaseVolume={decreaseVolume}
+        increaseSpeed={increaseSpeed}
+        decreaseSpeed={decreaseSpeed}
+        onAddColumn={onAddColumn}
+        onRemoveColumn={onRemoveColumn}
+        clearAllCells={clearAllCells}
 
-        {/* Grid size controls */}
-        <div className="control-group">
-          <button 
-            onClick={onRemoveColumn} 
-            disabled={!canRemoveColumn}
-            title="Remove column"
-            className="control-button"
-          >
-            -
-          </button>
-          <button 
-            onClick={onAddColumn}
-            disabled={!canAddColumn}
-            title="Add column"
-            className="control-button"
-          >
-            +
-          </button>
-        </div>
-      </div>
+          grid={grid}
+          tempo={tempo}
+          sampleNames={sampleNames}
+      />
       
-      {/* Category Toggles - updated to show toggle state */}
-      <div className="category-tabs">
-        {(Object.keys(instrumentCategories) as CategoryName[]).map(category => (
-          <button 
-            key={category}
-            className={`category-tab ${activeCategories.includes(category as CategoryName) ? 'active' : ''}`}
-            onClick={() => toggleCategory(category as CategoryName)}
-            title={`Toggle ${category} instruments`}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+      {/* Category selection tabs */}
+      <CategoryTabs
+        categories={instrumentCategories}
+        activeCategories={activeCategories}
+        onToggleCategory={toggleCategory}
+      />
 
-      {/* Grid - modified to handle the updated filtering */}
+      {/* Grid with instrument rows */}
       <div className="audio-grid">
         {organizedInstruments.map((name) => {
           const originalIndex = sampleNames.indexOf(name);
+          
+          // Skip if sample not found
+          if (originalIndex < 0 || !grid[originalIndex]) {
+            console.warn(`Sample "${name}" not found in sampleNames or grid`);
+            return null;
+          }
+
           return (
-            <div key={originalIndex} className="audio-grid-row">
-              <div className="audio-grid-sample-name">
-                {formatSampleName(name)}
-              </div>
-              <div className="audio-grid-cells">
-                {grid[originalIndex].map((cell, colIndex) => {
-                  const isCurrent = colIndex === currentColumn;
-                  return (
-                    <GridCell
-                      key={colIndex}
-                      active={cell}
-                      isCurrent={isCurrent}
-                      onClick={() => toggleCell(originalIndex, colIndex)}
-                    />
-                  );
-                })}
-              </div>
-            </div>
+            <GridRow
+              key={originalIndex}
+              name={name}
+              rowData={grid[originalIndex]}
+              currentColumn={currentColumn}
+              onToggleCell={(colIndex) => toggleCell(originalIndex, colIndex)}
+            />
           );
         })}
       </div>
