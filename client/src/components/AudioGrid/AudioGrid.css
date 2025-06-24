@@ -29,7 +29,34 @@
   display: flex;
 }
 
-/* Add these styles to your existing CSS file */
+.category-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 2px;
+}
+
+.category-tab {
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-right: 4px;
+  margin-bottom: 8px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-tab:hover {
+  background-color: #e5e5e5;
+}
+
+.category-tab.active {
+  background-color: #4CAF50;
+  color: white;
+  border-color: #3e8e41;
+}
 
 .audio-grid-controls {
   display: flex;

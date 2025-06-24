@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import GridCell from "../GridCell/GridCell";
 import { useAudioGrid } from "../../hooks/useAudioGrid";
 import "./AudioGrid.css"; 
@@ -21,11 +21,23 @@ const AudioGrid: React.FC<AudioGridProps> = ({
   canAddColumn = true,
   canRemoveColumn = true
 }) => {
+  
+  type CategoryName = "Drums" | "Hats" | "Percussion" | "Cymbals" | "Toms";
+
+const instrumentCategories: Record<CategoryName, string[]> = {
+  "Drums": ["Kick", "Snare", "Clap"],
+  "Hats": ["Hihat", "Openhat", "Openhat_Acoustic"],
+  "Percussion": ["Cowbell", "Perc_Hollow", "Perc_Tribal", "Shaker"],
+  "Cymbals": ["Crash", "Ride"],
+  "Toms": ["Tom_Analog", "Tom_Rototom"]
+};
+
+  const [activeCategories, setActiveCategories] = useState<CategoryName[]>(["Drums"]);
+
   const {
     sampleNames,
     grid,
     isPlaying,
-    isPaused,
     currentColumn,
     volume,
     playbackRate,
@@ -41,6 +53,27 @@ const AudioGrid: React.FC<AudioGridProps> = ({
     decreaseSpeed,
     toggleLoop,
   } = useAudioGrid(columns, tempo);
+
+  const toggleCategory = (category: CategoryName) => {
+    setActiveCategories(prev => {
+      if (prev.includes(category)) {
+        // Remove the category if it's already selected
+        return prev.filter(c => c !== category);
+      } else {
+        // Add the category if it's not selected
+        return [...prev, category];
+      }
+    });
+  };
+
+  // Modified to include instruments from any active category
+const organizedInstruments = activeCategories.flatMap(category => {
+  // Get all instruments in this category that exist in sampleNames
+  return instrumentCategories[category].filter(
+    name => sampleNames.includes(name)
+  );
+});
+
 
   if (grid.length === 0) {
     return <p style={{ padding: 20 }}>⏳ Loading grid...</p>;
@@ -60,9 +93,9 @@ const AudioGrid: React.FC<AudioGridProps> = ({
           <button 
             onClick={isPlaying ? pause : start} 
             className="control-button"
-            title={isPlaying ? "Pause" : isPaused ? "Resume" : "Play"}
+            title={isPlaying ? "Pause" : "Play"}
           >
-            {isPlaying ? "⏸️" : isPaused ? "▶️" : "▶️"}
+            {isPlaying ? "⏸️" : "▶️"}
           </button>
           <button 
             onClick={stop} 
@@ -154,26 +187,45 @@ const AudioGrid: React.FC<AudioGridProps> = ({
         </div>
       </div>
       
-      {/* Grid */}
-      <div className="audio-grid">
-        {grid.map((row, rowIndex) => (
-          <div key={rowIndex} className="audio-grid-row">
-            <div className="audio-grid-sample-name">{formatSampleName(sampleNames[rowIndex])}</div>
-            <div className="audio-grid-cells">
-              {row.map((cell, colIndex) => {
-                const isCurrent = colIndex === currentColumn;
-                return (
-                  <GridCell
-                    key={colIndex}
-                    active={cell}
-                    isCurrent={isCurrent}
-                    onClick={() => toggleCell(rowIndex, colIndex)}
-                  />
-                );
-              })}
-            </div>
-          </div>
+      {/* Category Toggles - updated to show toggle state */}
+      <div className="category-tabs">
+        {(Object.keys(instrumentCategories) as CategoryName[]).map(category => (
+          <button 
+            key={category}
+            className={`category-tab ${activeCategories.includes(category as CategoryName) ? 'active' : ''}`}
+            onClick={() => toggleCategory(category as CategoryName)}
+            title={`Toggle ${category} instruments`}
+          >
+            {category}
+          </button>
         ))}
+      </div>
+
+      {/* Grid - modified to handle the updated filtering */}
+      <div className="audio-grid">
+        {organizedInstruments.map((name) => {
+          const originalIndex = sampleNames.indexOf(name);
+          return (
+            <div key={originalIndex} className="audio-grid-row">
+              <div className="audio-grid-sample-name">
+                {formatSampleName(name)}
+              </div>
+              <div className="audio-grid-cells">
+                {grid[originalIndex].map((cell, colIndex) => {
+                  const isCurrent = colIndex === currentColumn;
+                  return (
+                    <GridCell
+                      key={colIndex}
+                      active={cell}
+                      isCurrent={isCurrent}
+                      onClick={() => toggleCell(originalIndex, colIndex)}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
