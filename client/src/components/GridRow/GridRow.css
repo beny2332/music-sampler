@@ -1,0 +1,40 @@
+.audio-grid-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* *** MUCH SMALLER SPACE BETWEEN ROWS *** */
+  /* Add a subtle bottom border for separation instead of large margin */
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(220, 220, 220, 0.5); /* Light separator */
+}
+
+.audio-grid-row:last-child {
+  margin-bottom: 0;
+  border-bottom: none; /* No border for the last row */
+}
+
+/* Sample Name (Kick, Snare, Clap labels) */
+.audio-grid-sample-name {
+  width: 120px; /* Increased width to fit longer names */
+  flex-shrink: 0; /* Prevent it from shrinking */
+  margin-right: 15px;
+  white-space: nowrap;
+  overflow: visible; /* Changed from hidden to visible so text doesn't get cut off */
+  text-overflow: clip; /* Remove ellipsis */
+  font-weight: 500;
+  color: #444;
+  font-size: 0.9em;
+  text-align: left; /* Changed from right to left alignment */
+  margin-right: 30px;
+  padding-left: 5px; /* Add padding to the left instead of right */
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  .audio-grid-sample-name {
+    color: #e0e0e0; /* Light text for dark backgrounds */
+  }
+
+  .audio-grid-row {
+    border-bottom-color: #444444; /* Darker border for dark mode */
+  }
+}

@@ -1,12 +1,9 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: #333;
+  background-color: #f7f9fc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -25,14 +22,28 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  padding: 20px; /* Ample padding around the entire app */
+  box-sizing: border-box;
+  overflow-x: hidden; /* Prevent horizontal scroll from minor layout shifts */
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.8em;
+  line-height: 1.2;
+  color: #2c3e50;
+  margin-bottom: 25px; /* Slightly less space, we want a more compact feel */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-icon {
+  font-size: 3.5em;
+  color: #6c5ce7;
 }
 
 button {
@@ -54,6 +65,27 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Dark mode support for the entire app */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #222222;
+    color: #e0e0e0;
+  }
+
+  /* This ensures all basic elements respect dark mode */
+  input,
+  textarea,
+  select {
+    background-color: #333333;
+    border-color: #444444;
+    color: #e0e0e0;
+  }
+
+  a {
+    color: #7d6ee8;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -64,5 +96,15 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #e0e0e0;
+    background-color: #2b2b2b;
+  }
+  h1 {
+    color: #f0f0f0;
   }
 }

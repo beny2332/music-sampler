@@ -1,0 +1,41 @@
+.grid-controls {
+  display: flex;
+  align-items: center;
+}
+
+.control-button[title="Add column"],
+.control-button[title="Remove column"] {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.control-button[title="Add column"]:hover,
+.control-button[title="Remove column"]:hover {
+  background-color: #e1bee7;
+}
+
+.control-button[title="Clear all cells"] {
+  background-color: #ffebee;
+  color: #b71c1c;
+  margin-left: 5px;
+}
+
+.control-button[title="Clear all cells"]:hover {
+  background-color: #ffcdd2;
+}
+
+/* Add dark mode support */
+@media (prefers-color-scheme: dark) {
+  .control-button[title="Add column"],
+  .control-button[title="Remove column"] {
+    background-color: #2d1a38;
+    color: #d9b3ff;
+  }
+
+  .control-button[title="Add column"]:hover,
+  .control-button[title="Remove column"]:hover {
+    background-color: #3d2a48;
+  }
+}

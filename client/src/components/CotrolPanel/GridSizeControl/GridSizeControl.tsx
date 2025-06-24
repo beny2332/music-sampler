@@ -1,4 +1,6 @@
 import React from "react";
+import "./GridSizeControl.css";
+import "../BaseControls.css";
 
 type GridSizeControlProps = {
   onAddColumn: () => void;

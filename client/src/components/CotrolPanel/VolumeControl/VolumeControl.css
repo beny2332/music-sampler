@@ -1,0 +1,42 @@
+.control-value {
+  font-size: 14px;
+  min-width: 40px;
+  text-align: center;
+  font-weight: bold;
+  color: #555;
+  user-select: none;
+}
+
+.control-button[title="Decrease volume"] {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+.control-button[title="Increase volume"] {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+.control-button[title="Decrease volume"]:hover,
+.control-button[title="Increase volume"]:hover {
+  background-color: #bbdefb;
+}
+
+.control-button[title="Decrease volume"]:active,
+.control-button[title="Increase volume"]:active {
+  background-color: #90caf9;
+}
+
+/* Add dark mode support */
+@media (prefers-color-scheme: dark) {
+  .control-button[title="Decrease volume"],
+  .control-button[title="Increase volume"] {
+    background-color: #1a2c3c;
+    color: #81c3ff;
+  }
+
+  .control-button[title="Decrease volume"]:hover,
+  .control-button[title="Increase volume"]:hover {
+    background-color: #25394c;
+  }
+}

@@ -5,6 +5,7 @@ import VolumeControl from "./VolumeControl/VolumeControl";
 import SpeedControl from "./SpeedControl/SpeedControl";
 import GridSizeControl from "./GridSizeControl/GridSizeControl";
 import ExportControls from "./ExportControls/ExportControls";
+import "./ControlPanel.css";
 
 type ControlPanelProps = {
   isPlaying: boolean;
@@ -40,35 +41,32 @@ const ControlPanel: React.FC<ControlPanelProps> = (props) => (
       reset={props.reset}
       clearAllCells={props.clearAllCells}
     />
-    
-    <LoopControl
-      looping={props.looping}
-      toggleLoop={props.toggleLoop}
-    />
-    
+
+    <LoopControl looping={props.looping} toggleLoop={props.toggleLoop} />
+
     <VolumeControl
       volume={props.volume}
       increaseVolume={props.increaseVolume}
       decreaseVolume={props.decreaseVolume}
     />
-    
+
     <SpeedControl
       playbackRate={props.playbackRate}
       increaseSpeed={props.increaseSpeed}
       decreaseSpeed={props.decreaseSpeed}
     />
-    
+
     <GridSizeControl
       onAddColumn={props.onAddColumn}
       onRemoveColumn={props.onRemoveColumn}
       canAddColumn={props.canAddColumn}
       canRemoveColumn={props.canRemoveColumn}
     />
-      <ExportControls
-        grid={props.grid}
-        tempo={props.tempo}
-        sampleNames={props.sampleNames}
-      />
+    {/* <ExportControls
+      grid={props.grid}
+      tempo={props.tempo}
+      sampleNames={props.sampleNames}
+    /> */}
   </div>
 );
 

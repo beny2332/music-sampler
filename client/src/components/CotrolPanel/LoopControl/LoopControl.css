@@ -1,0 +1,43 @@
+.control-button.active {
+  background-color: #bbdefb;
+  color: #1565c0;
+  box-shadow: inset 0 0 0 2px #1565c0;
+}
+
+.control-button.active:hover {
+  background-color: #90caf9;
+}
+
+.control-button.active[title="Disable Loop"] {
+  position: relative;
+}
+
+.control-button.active[title="Disable Loop"]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px dotted #1565c0;
+  border-radius: 4px;
+  animation: rotate 8s linear infinite;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .control-button.active {
+    background-color: #1a365d;
+    color: #90caf9;
+    box-shadow: inset 0 0 0 2px #90caf9;
+  }
+
+  .control-button.active:hover {
+    background-color: #234876;
+  }
+
+  .control-button.active[title="Disable Loop"]::after {
+    border: 2px dotted #90caf9;
+    opacity: 0.8;
+  }
+}

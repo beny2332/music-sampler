@@ -1,0 +1,27 @@
+.audio-grid-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Distribute items evenly */
+  gap: 12px;
+  margin-bottom: 20px; /* Maintain good separation from tabs */
+  padding: 15px 20px; /* More horizontal padding for a sleek bar */
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  align-items: center;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .audio-grid-controls {
+    background-color: #2a2a2a;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* @media (max-width: 768px) {
+  .audio-grid-controls {
+    flex-direction: column;
+    align-items: center;
+  } */
+/* } */

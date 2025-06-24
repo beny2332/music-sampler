@@ -1,6 +1,7 @@
 import React from "react";
 import GridCell from "../GridCell/GridCell";
 import { formatSampleName } from "../../utils/formatSampleName";
+import "./GridRow.css";
 
 type GridRowProps = {
   name: string;

@@ -1,0 +1,55 @@
+/* Category Tabs (Drums, Hats, etc.) */
+.category-tabs {
+  display: flex;
+  gap: 6px; /* Slightly smaller gap between tabs for more compactness */
+  margin: 0 0 20px 0; /* Position below controls, just above the grid content */
+  padding-bottom: 0;
+  align-items: flex-end;
+  flex-wrap: wrap; /* Allow tabs to wrap if many categories */
+}
+
+.category-tab {
+  padding: 9px 18px; /* Slightly less padding */
+  border-radius: 8px 8px 0 0;
+  background-color: #eef2f5;
+  border: 1px solid #dcdcdc;
+  border-bottom: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9em; /* Slightly smaller text */
+}
+
+.category-tab:hover {
+  background-color: #e0e4e8;
+  color: #333;
+}
+
+.category-tab.active {
+  background-color: #6c5ce7;
+  color: white;
+  border-color: #6c5ce7;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .category-tabs {
+    background-color: #3b3b3b;
+    border-color: #555;
+  }
+  .category-tab {
+    background-color: #4b4b4b;
+    border-color: #555;
+    color: #e0e0e0;
+  }
+  .category-tab:hover {
+    background-color: #5b5b5b;
+  }
+  .category-tab.active {
+    background-color: #6c5ce7;
+    border-color: #6c5ce7;
+  }
+}

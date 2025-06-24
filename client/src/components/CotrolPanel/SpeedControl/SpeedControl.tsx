@@ -1,4 +1,6 @@
 import React from "react";
+import "./SpeedControl.css";
+import "../BaseControls.css";
 
 type SpeedControlProps = {
   playbackRate: number;

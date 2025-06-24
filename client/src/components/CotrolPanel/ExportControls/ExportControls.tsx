@@ -1,6 +1,7 @@
 import React from 'react';
 import { generateMidiFile, downloadMidi } from '../../../utils/midiExport';
 import './ExportControls.css';
+import '../BaseControls.css';
 
 type ExportControlsProps = {
   grid: boolean[][];

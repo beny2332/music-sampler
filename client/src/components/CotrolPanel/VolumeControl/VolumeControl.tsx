@@ -1,4 +1,6 @@
 import React from "react";
+import "./VolumeControl.css";
+import "../BaseControls.css";
 
 type VolumeControlProps = {
   volume: number;
