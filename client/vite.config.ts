@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/music-sampler/',
+  base: '/music-sampler/client/',
   build: {
     outDir: 'dist'
   }
