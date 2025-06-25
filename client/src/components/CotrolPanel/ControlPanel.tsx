@@ -4,7 +4,6 @@ import LoopControl from "./LoopControl/LoopControl";
 import VolumeControl from "./VolumeControl/VolumeControl";
 import SpeedControl from "./SpeedControl/SpeedControl";
 import GridSizeControl from "./GridSizeControl/GridSizeControl";
-import ExportControls from "./ExportControls/ExportControls";
 import "./ControlPanel.css";
 
 type ControlPanelProps = {
